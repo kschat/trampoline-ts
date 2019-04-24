@@ -1,15 +1,31 @@
 {
   "name": "trampoline-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "description": "A type-safe way to emulate tail-call optimization with trampolines",
   "types": "dist/index.d.ts",
   "author": "Kyle Schattler",
   "license": "MIT",
+  "keywords": [
+    "trampoline",
+    "recursion",
+    "tail call",
+    "typesafe",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kschat/trampoline-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kschat/trampoline-ts/issues"
+  },
+  "homepage": "https://github.com/kschat/trampoline-ts#readme",
   "scripts": {
     "build": "tsc",
     "lint": "tslint --config ./tslint.json 'src/**/*.ts' 'test/**/*.ts'",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
