@@ -1,0 +1,26 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "interface-name": false,
+    "no-console": true,
+    "no-default-export": true,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [true, "single"],
+    "trailing-comma": [
+      true,
+      {
+        "esSpecCompliant": true,
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "format": "codeFrame"
+  }
+}
