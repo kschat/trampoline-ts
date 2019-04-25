@@ -25,7 +25,7 @@
     "build": "tsc",
     "lint": "tslint --config ./tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "test": "jest",
-    "ci-test": "yarn run lint && yarn run test",
+    "ci-test": "yarn run lint && jest --coverage --coverageReporters=text-lcov | coveralls",
     "prepublishOnly": "yarn build"
   },
   "husky": {
@@ -45,12 +45,32 @@
       "@commitlint/config-conventional"
     ]
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/git"
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/github": "^5.2.10",
+    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/release-notes-generator": "^7.1.4",
     "@types/jest": "^24.0.11",
     "@types/node": "^8.10.46",
     "conditional-type-checks": "^1.0.0",
+    "coveralls": "^3.0.3",
     "husky": "^2.1.0",
     "jest": "^24.7.1",
     "lint-staged": "^8.1.5",
