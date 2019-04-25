@@ -55,7 +55,7 @@ signature as the passed function, so there's no way to call it incorrectly.
 
 A function that represents a tail-call optimized function.
 
-##### `Trampoline<F>.cont(...args: ArgumentTypes<F>): Thunk<ReturnType<F>>
+##### `Trampoline<F>.cont(...args: ArgumentTypes<F>): Thunk<ReturnType<F>>`
 
 Function used to safely continue recursion. It captures `F`'s argument and
 return types and thus has the same type signature.

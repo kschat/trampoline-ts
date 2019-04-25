@@ -55,6 +55,13 @@
       "@semantic-release/git"
     ]
   },
+  "jest": {
+    "collectCoverage": true,
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": ["<rootDir>/test/**/*.spec.ts"],
+    "verbose": true
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
