@@ -25,13 +25,36 @@
     "build": "tsc",
     "lint": "tslint --config ./tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "test": "jest",
+    "ci-test": "yarn run lint && yarn run test",
     "prepublishOnly": "yarn build"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "tslint --fix",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "devDependencies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@types/jest": "^24.0.11",
     "@types/node": "^8.10.46",
     "conditional-type-checks": "^1.0.0",
+    "husky": "^2.1.0",
     "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "typescript": "^3.4.4"

@@ -2,3 +2,16 @@ language: node_js
 node_js:
   - "8"
   - "10"
+jobs:
+  include:
+    - stage: test
+      script: yarn run ci-test
+    - stage: release
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        on:
+          branch: master
+        script:
+          - npx semantic-release
