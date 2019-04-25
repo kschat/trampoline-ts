@@ -1,6 +1,6 @@
 {
   "name": "trampoline-ts",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "dist/src/index.js",
   "description": "A type-safe way to emulate tail-call optimization with trampolines",
   "types": "dist/src/index.d.ts",
