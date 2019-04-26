@@ -51,9 +51,17 @@ Also note that to continue function recursion `Trampoline<F>.cont()` should
 be called, and not the function directly. `.cont()` has the same type
 signature as the passed function, so there's no way to call it incorrectly.
 
+##### `trampolineAsync<F extends ((...args: any[]) => ThunkOrValue<any>)>(fn: F): TrampolineAsync<F>`
+
+Same as `trampoline`, but works with `async/Promise-returning` functions.
+
 ##### `Trampoline<F extends ((...args: any[]) => ThunkOrValue<any>>`
 
 A function that represents a tail-call optimized function.
+
+##### `TrampolineAsync<F extends ((...args: any[]) => ThunkOrValue<any>>`
+
+An async function that represents a tail-call optimized function.
 
 ##### `Trampoline<F>.cont(...args: ArgumentTypes<F>): Thunk<ReturnType<F>>`
 
