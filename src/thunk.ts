@@ -7,8 +7,8 @@ export interface Thunk<T> extends Function {
 
 export type ThunkOrValue<T> = T | Thunk<T>;
 
-export type UnwrapThunk<T> = {
-  0: T extends Thunk<infer U> ? UnwrapThunk<U> : T;
+export type UnwrapThunkDeep<T> = {
+  0: T extends Thunk<infer U> ? UnwrapThunkDeep<U> : T;
 }[
   T extends ThunkOrValue<T> ? 0 : never
 ];

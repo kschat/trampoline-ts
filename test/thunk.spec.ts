@@ -3,7 +3,7 @@ import {
   isThunk,
   toThunk,
   THUNK_SYMBOL,
-  UnwrapThunk,
+  UnwrapThunkDeep,
   Thunk,
   ThunkOrValue,
 } from '../src/thunk';
@@ -32,13 +32,13 @@ describe('thunk', () => {
 
   describe('UnwrapThunk<T>', () => {
     it('removes recursively removes all instances of Thunk<T> from T', () => {
-      typeAssert<IsExact<UnwrapThunk<1>, 1>>(true);
-      typeAssert<IsExact<UnwrapThunk<Thunk<1>>, 1>>(true);
-      typeAssert<IsExact<UnwrapThunk<ThunkOrValue<1>>, 1>>(true);
-      typeAssert<IsExact<UnwrapThunk<ThunkOrValue<Thunk<1>>>, 1>>(true);
-      typeAssert<IsExact<UnwrapThunk<ThunkOrValue<ThunkOrValue<1> | ThunkOrValue<2>>>, 1 | 2>>(true);
-      typeAssert<IsExact<UnwrapThunk<Thunk<1 | Thunk<2>>>, 1 | 2>>(true);
-      typeAssert<IsExact<UnwrapThunk<Thunk<1 | Thunk<2> | ThunkOrValue<3>>>, 1 | 2 | 3>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<1>, 1>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<Thunk<1>>, 1>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<1>>, 1>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<Thunk<1>>>, 1>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<ThunkOrValue<1> | ThunkOrValue<2>>>, 1 | 2>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<Thunk<1 | Thunk<2>>>, 1 | 2>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<Thunk<1 | Thunk<2> | ThunkOrValue<3>>>, 1 | 2 | 3>>(true);
     });
   });
 });

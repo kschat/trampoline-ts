@@ -1,5 +1,5 @@
 import { assert as typeAssert, IsExact, Has } from 'conditional-type-checks';
-import { trampoline, isThunk, ThunkOrValue } from '../src';
+import { trampoline, isThunk, ThunkOrValue, trampolineAsync } from '../src';
 import { ArgumentTypes } from '../src/types';
 
 describe('trampoline', () => {
@@ -98,6 +98,19 @@ describe('trampoline', () => {
 
       expect(fn()).toBeInstanceOf(Function);
       expect(fn()()).toBe('hello');
+    });
+
+    it('supports async functions', async () => {
+      const sleep = async (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+
+      const factorial = trampolineAsync(async (n: number, acc: number = 1): Promise<ThunkOrValue<number>> => {
+        await sleep(10);
+        return n
+          ? factorial.cont(n - 1, acc * n)
+          : acc;
+      });
+
+      expect(await factorial(2)).toBe(2);
     });
   });
 });
