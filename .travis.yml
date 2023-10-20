@@ -9,7 +9,7 @@ branches:
 jobs:
   include:
     - stage: test
-      script: yarn run ci-test
+      script: pnpm run ci-test
     - stage: release
       if: branch = master AND type != pull_request
       script: skip

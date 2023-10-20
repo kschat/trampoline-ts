@@ -22,20 +22,20 @@
   },
   "homepage": "https://github.com/kschat/trampoline-ts#readme",
   "scripts": {
+    "prepublishOnly": "pnpm run build",
+    "prepare": "husky install",
     "build": "tsc",
     "format": "prettier --check --log-level warn .",
     "format-fix": "prettier --fix --log-level warn .",
     "lint": "eslint . --ext .ts,.js --max-warnings 0 --report-unused-disable-directives",
-    "lint-fix": "yarn run lint --fix",
+    "lint-fix": "pnpm run lint --fix",
     "test": "jest",
-    "ci-test": "yarn run format && yarn run lint && jest --coverage --coverageReporters=text-lcov | coveralls",
-    "prepublishOnly": "yarn build",
-    "prepare": "husky install"
+    "ci-test": "pnpm run format && pnpm run lint && jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "yarn run format-fix",
-      "yarn run lint-fix"
+      "pnpm run format-fix",
+      "pnpm run lint-fix"
     ]
   },
   "commitlint": {

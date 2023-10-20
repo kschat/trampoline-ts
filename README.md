@@ -12,6 +12,8 @@ A type-safe way to emulate tail-call optimization with trampolines
 npm i trampoline-ts
 # or
 yarn add trampoline-ts
+# or
+pnpm add trampoline-ts
 ```
 
 ## TypeScript Compatibility
