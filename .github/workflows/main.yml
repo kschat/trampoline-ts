@@ -50,6 +50,8 @@ jobs:
 
       - name: Report code coverage
         uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
