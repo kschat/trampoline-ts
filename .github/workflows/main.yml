@@ -45,13 +45,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check format
+        run: pnpm run format
+
+      - name: Lint
+        run: pnpm run lint
+
       - name: Run tests
-        run: pnpm run ci-test
+        run: pnpm run test-ci
 
       - name: Report code coverage
-        uses: coverallsapp/github-action@v2
+        uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          skip-step: install
+          coverage-file: ./coverage/coverage-final.json
+          base-coverage-file: ./coverage/coverage-final.json
 
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}

@@ -32,7 +32,7 @@
     "lint": "pnpm run lint-base .",
     "lint-fix": "pnpm run lint-base --fix .",
     "test": "jest",
-    "ci-test": "pnpm run format && pnpm run lint && jest --coverage --coverageReporters=text-lcov"
+    "test-ci": "jest --ci --coverage --testLocationInResults"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
