@@ -12,7 +12,7 @@ describe('trampoline', () => {
       const impl = (_1: number, _2: string, _3: boolean) => true;
       const fn = trampoline(impl);
 
-      // tslint:disable-next-line:ban-types
+      // eslint-disable-next-line @typescript-eslint/ban-types
       typeAssert<Has<typeof fn, Function>>(true);
       typeAssert<IsExact<ArgumentTypes<typeof fn>, [number, string, boolean]>>(true);
     });
@@ -21,7 +21,7 @@ describe('trampoline', () => {
       const impl = () => true;
       const fn = trampoline(impl);
 
-      // tslint:disable-next-line:ban-types
+      // eslint-disable-next-line @typescript-eslint/ban-types
       typeAssert<Has<typeof fn, Function>>(true);
       typeAssert<IsExact<ReturnType<typeof fn>, boolean>>(true);
     });
@@ -30,7 +30,7 @@ describe('trampoline', () => {
       const impl = (): ThunkOrValue<boolean> => true;
       const fn = trampoline(impl);
 
-      // tslint:disable-next-line:ban-types
+      // eslint-disable-next-line @typescript-eslint/ban-types
       typeAssert<Has<typeof fn, Function>>(true);
       typeAssert<IsExact<ReturnType<typeof fn>, boolean>>(true);
     });
@@ -39,7 +39,7 @@ describe('trampoline', () => {
       const impl = (_1: number, _2: string, _3: boolean) => true;
       const { cont } = trampoline(impl);
 
-      // tslint:disable-next-line:ban-types
+      // eslint-disable-next-line @typescript-eslint/ban-types
       typeAssert<Has<typeof cont, Function>>(true);
       typeAssert<IsExact<ArgumentTypes<typeof cont>, [number, string, boolean]>>(true);
     });
@@ -49,7 +49,7 @@ describe('trampoline', () => {
       const { cont } = trampoline(impl);
       const thunk = cont();
 
-      // tslint:disable-next-line:ban-types
+      // eslint-disable-next-line @typescript-eslint/ban-types
       typeAssert<Has<typeof cont, Function>>(true);
       typeAssert<Has<ReturnType<typeof thunk>, boolean>>(true);
     });
@@ -65,7 +65,7 @@ describe('trampoline', () => {
       expect(fn).toHaveBeenNthCalledWith(1, 'input');
     });
 
-    it(`loops until the passed function doesn't return a thunk`, () => {
+    it("loops until the passed function doesn't return a thunk", () => {
       const timesToLoop = 5;
       const fn = trampoline((times: number = 0): ThunkOrValue<number> => {
         return times < timesToLoop ? fn.cont(times + 1) : times;
@@ -76,15 +76,13 @@ describe('trampoline', () => {
       expect(contSpy).toHaveBeenCalledTimes(5);
     });
 
-    it(`doesn't throw a stack overflow error`, () => {
+    it("doesn't throw a stack overflow error", () => {
       const brokenFactorial = (n: number, acc: number = 1): number => {
         return n ? brokenFactorial(n - 1, acc * n) : acc;
       };
 
       const factorial = trampoline((n: number, acc: number = 1): ThunkOrValue<number> => {
-        return n
-          ? factorial.cont(n - 1, acc * n)
-          : acc;
+        return n ? factorial.cont(n - 1, acc * n) : acc;
       });
 
       expect(() => brokenFactorial(32768)).toThrowError('Maximum call stack size exceeded');
@@ -101,14 +99,15 @@ describe('trampoline', () => {
     });
 
     it('supports async functions', async () => {
-      const sleep = async (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+      const sleep = async (ms: number): Promise<void> =>
+        new Promise((resolve) => setTimeout(resolve, ms));
 
-      const factorial = trampolineAsync(async (n: number, acc: number = 1): Promise<ThunkOrValue<number>> => {
-        await sleep(10);
-        return n
-          ? factorial.cont(n - 1, acc * n)
-          : acc;
-      });
+      const factorial = trampolineAsync(
+        async (n: number, acc: number = 1): Promise<ThunkOrValue<number>> => {
+          await sleep(10);
+          return n ? factorial.cont(n - 1, acc * n) : acc;
+        },
+      );
 
       expect(await factorial(2)).toBe(2);
     });

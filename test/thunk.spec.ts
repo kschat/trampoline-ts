@@ -1,12 +1,5 @@
 import { assert as typeAssert, IsExact } from 'conditional-type-checks';
-import {
-  isThunk,
-  toThunk,
-  THUNK_SYMBOL,
-  UnwrapThunkDeep,
-  Thunk,
-  ThunkOrValue,
-} from '../src/thunk';
+import { isThunk, toThunk, THUNK_SYMBOL, UnwrapThunkDeep, Thunk, ThunkOrValue } from '../src/thunk';
 
 describe('thunk', () => {
   describe('isThunk(value)', () => {
@@ -36,7 +29,9 @@ describe('thunk', () => {
       typeAssert<IsExact<UnwrapThunkDeep<Thunk<1>>, 1>>(true);
       typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<1>>, 1>>(true);
       typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<Thunk<1>>>, 1>>(true);
-      typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<ThunkOrValue<1> | ThunkOrValue<2>>>, 1 | 2>>(true);
+      typeAssert<IsExact<UnwrapThunkDeep<ThunkOrValue<ThunkOrValue<1> | ThunkOrValue<2>>>, 1 | 2>>(
+        true,
+      );
       typeAssert<IsExact<UnwrapThunkDeep<Thunk<1 | Thunk<2>>>, 1 | 2>>(true);
       typeAssert<IsExact<UnwrapThunkDeep<Thunk<1 | Thunk<2> | ThunkOrValue<3>>>, 1 | 2 | 3>>(true);
     });
