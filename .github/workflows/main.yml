@@ -71,4 +71,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm run release-ci
+        run: ls node_modules/.bin; pnpm run release-ci
