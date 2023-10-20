@@ -48,6 +48,9 @@ jobs:
       - name: Run tests
         run: pnpm run ci-test
 
+      - name: Report code coverage
+        uses: coverallsapp/github-action@v2
+
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
