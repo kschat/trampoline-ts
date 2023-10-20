@@ -59,8 +59,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           skip-step: install
-          coverage-file: ./coverage/coverage-final.json
-          base-coverage-file: ./coverage/coverage-final.json
+          coverage-file: ./coverage/gh-coverage-report-action.json
+          base-coverage-file: ./coverage/gh-coverage-report-action.json
 
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
