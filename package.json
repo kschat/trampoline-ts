@@ -32,8 +32,7 @@
     "lint": "pnpm run lint-base .",
     "lint-fix": "pnpm run lint-base --fix .",
     "test": "jest",
-    "test-ci": "./scripts/test-ci.sh",
-    "release-ci": "semantic-release"
+    "test-ci": "./scripts/test-ci.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [

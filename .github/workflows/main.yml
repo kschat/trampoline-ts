@@ -62,13 +62,13 @@ jobs:
           coverage-file: ./coverage/gh-coverage-report-action.json
           base-coverage-file: ./coverage/gh-coverage-report-action.json
 
-      - name: Update coverage badge
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: we-cli/coverage-badge-action@main
-
-      - name: Release
+      - name: Publish
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pwd; ls -la; pnpm run release-ci
+        run: ls -la node_modules; pnpm exec semantic-release
+
+      - name: Update coverage badge
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: we-cli/coverage-badge-action@main
