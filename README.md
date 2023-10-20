@@ -1,7 +1,7 @@
 # Trampoline TS
 
-[![Build Status](https://github.com/kschat/trampoline-ts/actions)](https://github.com/kschat2/trampoline-ts/actions/workflows/main.yml/badge.svg)
-[![Coverage Status](https://kschat2.github.io/trampoline-ts/badges/coverage.svg)](https://github.com/kschat2/trampoline-ts/actions)
+[![Build Status](https://github.com/kschat/trampoline-ts/actions/workflows/main.yml/badge.svg)](https://github.com/kschat/trampoline-ts/actions)
+[![Coverage Status](https://kschat.github.io/trampoline-ts/badges/coverage.svg)](https://github.com/kschat/trampoline-ts/actions)
 [![npm version](https://badge.fury.io/js/trampoline-ts.svg)](https://badge.fury.io/js/trampoline-ts)
 
 A type-safe way to emulate tail-call optimization with trampolines
