@@ -32,7 +32,7 @@
     "lint": "pnpm run lint-base .",
     "lint-fix": "pnpm run lint-base --fix .",
     "test": "jest",
-    "test-ci": "jest --ci --json --coverage --testLocationInResults --outputFile coverage/gh-coverage-report-action.json"
+    "test-ci": "./scripts/test-ci.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [

@@ -39,11 +39,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: 20
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Check format
         run: pnpm run format
@@ -61,6 +61,10 @@ jobs:
           skip-step: install
           coverage-file: ./coverage/gh-coverage-report-action.json
           base-coverage-file: ./coverage/gh-coverage-report-action.json
+
+      - name: Update coverage badge
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: we-cli/coverage-badge-action@main
 
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
