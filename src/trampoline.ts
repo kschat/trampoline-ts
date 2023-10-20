@@ -1,7 +1,9 @@
 import { ArgumentTypes } from './types';
 import { Thunk, UnwrapThunkDeep, isThunk, toThunk, ThunkOrValue } from './thunk';
 
-export type Unbox<T> = UnwrapThunkDeep<Awaited<T>>;
+export type UnwrapPromise<T> = T extends Promise<infer U> ? Exclude<U, Promise<T>> : T;
+
+export type Unbox<T> = UnwrapThunkDeep<UnwrapPromise<T>>;
 
 export type Cont<A extends any[], R> = (...args: A) => Thunk<Unbox<R>>;
 
