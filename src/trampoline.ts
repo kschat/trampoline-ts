@@ -48,7 +48,6 @@ export const trampolineAsync = <F extends (...args: any[]) => any>(fn: F): Tramp
         result = await result();
       }
 
-
       return result;
     },
     { cont },
