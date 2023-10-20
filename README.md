@@ -1,6 +1,6 @@
 # Trampoline TS
 
-[![Build Status](https://travis-ci.com/kschat/trampoline-ts.svg?branch=master)](https://travis-ci.com/kschat/trampoline-ts)
+[![Build Status](https://github.com/kschat/trampoline-ts/actions)](https://github.com/kschat2/trampoline-ts/actions/workflows/main.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/kschat/trampoline-ts/badge.svg?branch=master)](https://coveralls.io/github/kschat/trampoline-ts?branch=master)
 [![npm version](https://badge.fury.io/js/trampoline-ts.svg)](https://badge.fury.io/js/trampoline-ts)
 

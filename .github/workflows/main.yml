@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  release:
-    name: Release
+  build:
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       # to be able to publish a GitHub release
