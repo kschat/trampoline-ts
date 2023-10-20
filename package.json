@@ -25,8 +25,9 @@
     "prepublishOnly": "pnpm run build",
     "prepare": "husky install",
     "build": "tsc",
-    "format": "prettier --check --log-level warn .",
-    "format-fix": "prettier --write --log-level warn .",
+    "format-base": "prettier --log-level warn",
+    "format": "pnpm run format-base --check .",
+    "format-fix": "pnpm run format-base --write .",
     "lint": "eslint . --ext .ts,.js --max-warnings 0 --report-unused-disable-directives",
     "lint-fix": "pnpm run lint --fix",
     "test": "jest",
@@ -34,9 +35,10 @@
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "pnpm run format-fix",
+      "pnpm run format-base -u",
       "pnpm run lint-fix"
-    ]
+    ],
+    "!**/*.{js,ts,jsx,tsx}": "prettier --write -u"
   },
   "commitlint": {
     "extends": [
