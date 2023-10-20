@@ -1,0 +1,74 @@
+name: Main
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  # for checkout
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      # to be able to publish a GitHub release
+      contents: write
+      # to be able to comment on released issues
+      issues: write
+      # to be able to comment on released pull requests
+      pull-requests: write
+      # to enable use of OIDC for npm provenance
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check format
+        run: pnpm run format
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Run tests
+        run: pnpm run test-ci
+
+      - name: Report code coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          skip-step: install
+          coverage-file: ./coverage/gh-coverage-report-action.json
+          base-coverage-file: ./coverage/gh-coverage-report-action.json
+
+      - name: Update coverage badge
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: we-cli/coverage-badge-action@main
+
+      - name: Release
+        if: ${{ github.ref == 'refs/heads/master' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm exec semantic-release

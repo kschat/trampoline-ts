@@ -19,13 +19,7 @@
     "sourceMap": true,
     "allowJs": false,
     "resolveJsonModule": true,
-    "lib": [
-      "es2017"
-    ],
+    "lib": ["es2017"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage"
-  ]
+  "exclude": ["node_modules", "dist", "coverage"]
 }

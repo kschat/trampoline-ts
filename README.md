@@ -1,7 +1,7 @@
 # Trampoline TS
 
-[![Build Status](https://travis-ci.com/kschat/trampoline-ts.svg?branch=master)](https://travis-ci.com/kschat/trampoline-ts)
-[![Coverage Status](https://coveralls.io/repos/github/kschat/trampoline-ts/badge.svg?branch=master)](https://coveralls.io/github/kschat/trampoline-ts?branch=master)
+[![Build Status](https://github.com/kschat/trampoline-ts/actions)](https://github.com/kschat2/trampoline-ts/actions/workflows/main.yml/badge.svg)
+[![Coverage Status](https://kschat2.github.io/trampoline-ts/badges/coverage.svg)](https://github.com/kschat2/trampoline-ts/actions)
 [![npm version](https://badge.fury.io/js/trampoline-ts.svg)](https://badge.fury.io/js/trampoline-ts)
 
 A type-safe way to emulate tail-call optimization with trampolines
@@ -27,8 +27,8 @@ import { trampoline, ThunkOrValue } from 'trampoline-ts';
 
 const factorial = trampoline((n: number, acc: number = 1): ThunkOrValue<number> => {
   return n
-    // Note: calling factorial.cont instead of factorial directly
-    ? factorial.cont(n - 1, acc * n)
+    ? // Note: calling factorial.cont instead of factorial directly
+      factorial.cont(n - 1, acc * n)
     : acc;
 });
 

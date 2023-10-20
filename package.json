@@ -25,18 +25,21 @@
     "prepublishOnly": "pnpm run build",
     "prepare": "husky install",
     "build": "tsc",
-    "format": "prettier --check --log-level warn .",
-    "format-fix": "prettier --fix --log-level warn .",
-    "lint": "eslint . --ext .ts,.js --max-warnings 0 --report-unused-disable-directives",
-    "lint-fix": "pnpm run lint --fix",
+    "format-base": "prettier --log-level warn",
+    "format": "pnpm run format-base --check .",
+    "format-fix": "pnpm run format-base --write .",
+    "lint-base": "eslint --ext .ts,.js --max-warnings 0 --report-unused-disable-directives",
+    "lint": "pnpm run lint-base .",
+    "lint-fix": "pnpm run lint-base --fix .",
     "test": "jest",
-    "ci-test": "pnpm run format && pnpm run lint && jest --coverage --coverageReporters=text-lcov | coveralls"
+    "test-ci": "./scripts/test-ci.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "pnpm run format-fix",
-      "pnpm run lint-fix"
-    ]
+      "pnpm run format-base --fix -u",
+      "pnpm run lint-base --fix"
+    ],
+    "!**/*.{js,ts,jsx,tsx}": "pnpm run format-base --fix -u"
   },
   "commitlint": {
     "extends": [
