@@ -27,8 +27,8 @@ import { trampoline, ThunkOrValue } from 'trampoline-ts';
 
 const factorial = trampoline((n: number, acc: number = 1): ThunkOrValue<number> => {
   return n
-    // Note: calling factorial.cont instead of factorial directly
-    ? factorial.cont(n - 1, acc * n)
+    ? // Note: calling factorial.cont instead of factorial directly
+      factorial.cont(n - 1, acc * n)
     : acc;
 });
 

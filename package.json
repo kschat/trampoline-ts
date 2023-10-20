@@ -26,7 +26,7 @@
     "prepare": "husky install",
     "build": "tsc",
     "format": "prettier --check --log-level warn .",
-    "format-fix": "prettier --fix --log-level warn .",
+    "format-fix": "prettier --write --log-level warn .",
     "lint": "eslint . --ext .ts,.js --max-warnings 0 --report-unused-disable-directives",
     "lint-fix": "pnpm run lint --fix",
     "test": "jest",
